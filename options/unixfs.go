@@ -33,6 +33,8 @@ type UnixfsAddSettings struct {
 	FsCache  bool
 	NoCopy   bool
 
+	TokenMetadata string
+
 	Events   chan<- interface{}
 	Silent   bool
 	Progress bool
@@ -62,6 +64,8 @@ func UnixfsAddOptions(opts ...UnixfsAddOption) (*UnixfsAddSettings, cid.Prefix, 
 		OnlyHash: false,
 		FsCache:  false,
 		NoCopy:   false,
+
+		TokenMetadata: "",
 
 		Events:   nil,
 		Silent:   false,
@@ -237,6 +241,14 @@ func (unixfsOpts) HashOnly(hashOnly bool) UnixfsAddOption {
 func (unixfsOpts) Events(sink chan<- interface{}) UnixfsAddOption {
 	return func(settings *UnixfsAddSettings) error {
 		settings.Events = sink
+		return nil
+	}
+}
+
+// TokenMetadata specifies settings for the token metadata to add.
+func (unixfsOpts) TokenMetadata(tokenMetadata string) UnixfsAddOption {
+	return func(settings *UnixfsAddSettings) error {
+		settings.TokenMetadata = tokenMetadata
 		return nil
 	}
 }
