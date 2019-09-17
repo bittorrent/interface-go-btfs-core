@@ -5,7 +5,7 @@ import (
 	"context"
 	"encoding/hex"
 	"fmt"
-	"github.com/ipfs/interface-go-ipfs-core/path"
+	"github.com/TRON-US/interface-go-btfs-core/path"
 	"io"
 	"io/ioutil"
 	"math"
@@ -16,8 +16,8 @@ import (
 	"sync"
 	"testing"
 
-	coreiface "github.com/ipfs/interface-go-ipfs-core"
-	"github.com/ipfs/interface-go-ipfs-core/options"
+	coreiface "github.com/TRON-US/interface-go-btfs-core"
+	"github.com/TRON-US/interface-go-btfs-core/options"
 
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-ipfs-files"

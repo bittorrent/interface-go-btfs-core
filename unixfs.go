@@ -2,8 +2,8 @@ package iface
 
 import (
 	"context"
-	"github.com/ipfs/interface-go-ipfs-core/options"
-	path "github.com/ipfs/interface-go-ipfs-core/path"
+	"github.com/TRON-US/interface-go-btfs-core/options"
+	path "github.com/TRON-US/interface-go-btfs-core/path"
 
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-ipfs-files"
