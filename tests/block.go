@@ -2,13 +2,13 @@ package tests
 
 import (
 	"context"
-	"github.com/ipfs/interface-go-ipfs-core/path"
+	"github.com/TRON-US/interface-go-btfs-core/path"
 	"io/ioutil"
 	"strings"
 	"testing"
 
-	coreiface "github.com/ipfs/interface-go-ipfs-core"
-	opt "github.com/ipfs/interface-go-ipfs-core/options"
+	coreiface "github.com/TRON-US/interface-go-btfs-core"
+	opt "github.com/TRON-US/interface-go-btfs-core/options"
 
 	mh "github.com/multiformats/go-multihash"
 )

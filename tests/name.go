@@ -2,7 +2,7 @@ package tests
 
 import (
 	"context"
-	path "github.com/ipfs/interface-go-ipfs-core/path"
+	path "github.com/TRON-US/interface-go-btfs-core/path"
 	"io"
 	"math/rand"
 	gopath "path"
@@ -12,8 +12,8 @@ import (
 	"github.com/ipfs/go-ipfs-files"
 	ipath "github.com/ipfs/go-path"
 
-	coreiface "github.com/ipfs/interface-go-ipfs-core"
-	opt "github.com/ipfs/interface-go-ipfs-core/options"
+	coreiface "github.com/TRON-US/interface-go-btfs-core"
+	opt "github.com/TRON-US/interface-go-btfs-core/options"
 )
 
 func (tp *TestSuite) TestName(t *testing.T) {

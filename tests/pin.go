@@ -2,13 +2,13 @@ package tests
 
 import (
 	"context"
-	"github.com/ipfs/interface-go-ipfs-core/path"
+	"github.com/TRON-US/interface-go-btfs-core/path"
 	"math"
 	"strings"
 	"testing"
 
-	"github.com/ipfs/interface-go-ipfs-core"
-	opt "github.com/ipfs/interface-go-ipfs-core/options"
+	"github.com/TRON-US/interface-go-btfs-core"
+	opt "github.com/TRON-US/interface-go-btfs-core/options"
 
 	ipldcbor "github.com/ipfs/go-ipld-cbor"
 	ipld "github.com/ipfs/go-ipld-format"
