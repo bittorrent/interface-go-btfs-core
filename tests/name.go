@@ -212,7 +212,7 @@ func (tp *TestSuite) TestBasicPublishResolveKey(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	if ipath.Join([]string{"/ipns", e.Name()}) != k.Path().String() {
+	if ipath.Join([]string{"/btns", e.Name()}) != k.Path().String() {
 		t.Errorf("expected e.Name to equal '%s', got '%s'", e.Name(), k.Path().String())
 	}
 

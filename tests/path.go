@@ -9,7 +9,7 @@ import (
 
 	"github.com/TRON-US/interface-go-btfs-core/options"
 
-	ipldcbor "github.com/ipfs/go-ipld-cbor"
+	ipldcbor "github.com/btfs/go-ipld-cbor"
 )
 
 func (tp *TestSuite) TestPath(t *testing.T) {
@@ -188,9 +188,9 @@ func (tp *TestSuite) TestPathRoot(t *testing.T) {
 }
 
 func (tp *TestSuite) TestPathJoin(t *testing.T) {
-	p1 := path.New("/ipfs/QmYNmQKp6SuaVrpgWRsPTgCQCnpxUYGq76YEKBXuj2N4H6/bar/baz")
+	p1 := path.New("/btfs/QmYNmQKp6SuaVrpgWRsPTgCQCnpxUYGq76YEKBXuj2N4H6/bar/baz")
 
-	if path.Join(p1, "foo").String() != "/ipfs/QmYNmQKp6SuaVrpgWRsPTgCQCnpxUYGq76YEKBXuj2N4H6/bar/baz/foo" {
+	if path.Join(p1, "foo").String() != "/btfs/QmYNmQKp6SuaVrpgWRsPTgCQCnpxUYGq76YEKBXuj2N4H6/bar/baz/foo" {
 		t.Error("unexpected path")
 	}
 }
