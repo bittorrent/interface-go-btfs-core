@@ -23,8 +23,8 @@ import (
 	"github.com/ipfs/go-ipfs-files"
 	cbor "github.com/ipfs/go-ipld-cbor"
 	mdag "github.com/ipfs/go-merkledag"
-	"github.com/ipfs/go-unixfs"
-	"github.com/ipfs/go-unixfs/importer/helpers"
+	"github.com/TRON-US/go-unixfs"
+	"github.com/TRON-US/go-unixfs/importer/helpers"
 	mh "github.com/multiformats/go-multihash"
 )
 
