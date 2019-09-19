@@ -9,7 +9,7 @@ import (
 
 	"github.com/TRON-US/interface-go-btfs-core/options"
 
-	ipldcbor "github.com/btfs/go-ipld-cbor"
+	ipldcbor "github.com/ipfs/go-ipld-cbor"
 )
 
 func (tp *TestSuite) TestPath(t *testing.T) {
