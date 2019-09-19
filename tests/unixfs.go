@@ -50,12 +50,12 @@ func (tp *TestSuite) TestUnixfs(t *testing.T) {
 	t.Run("TestGetSeek", tp.TestGetSeek)
 }
 
-// `echo -n 'hello, world!' | ipfs add`
-var hello = "/ipfs/QmQy2Dw4Wk7rdJKjThjYXzfFJNaRKRHhHP5gHHXroJMYxk"
+// `echo -n 'hello, world!' | btfs add`
+var hello = "/btfs/QmQy2Dw4Wk7rdJKjThjYXzfFJNaRKRHhHP5gHHXroJMYxk"
 var helloStr = "hello, world!"
 
-// `echo -n | ipfs add`
-var emptyFile = "/ipfs/QmbFMke1KXqnYyBBWxB74N4c5SBnJMVAiMNRcGu6x1AwQH"
+// `echo -n | btfs add`
+var emptyFile = "/btfs/QmbFMke1KXqnYyBBWxB74N4c5SBnJMVAiMNRcGu6x1AwQH"
 
 func strFile(data string) func() files.Node {
 	return func() files.Node {
@@ -170,20 +170,20 @@ func (tp *TestSuite) TestAdd(t *testing.T) {
 		{
 			name: "addCidV1",
 			data: strFile(helloStr),
-			path: "/ipfs/bafkreidi4zlleupgp2bvrpxyja5lbvi4mym7hz5bvhyoowby2qp7g2hxfa",
+			path: "/btfs/bafkreidi4zlleupgp2bvrpxyja5lbvi4mym7hz5bvhyoowby2qp7g2hxfa",
 			opts: []options.UnixfsAddOption{options.Unixfs.CidVersion(1)},
 		},
 		{
 			name: "addCidV1NoLeaves",
 			data: strFile(helloStr),
-			path: "/ipfs/bafybeibhbcn7k7o2m6xsqkrlfiokod3nxwe47viteynhruh6uqx7hvkjfu",
+			path: "/btfs/bafybeibhbcn7k7o2m6xsqkrlfiokod3nxwe47viteynhruh6uqx7hvkjfu",
 			opts: []options.UnixfsAddOption{options.Unixfs.CidVersion(1), options.Unixfs.RawLeaves(false)},
 		},
 		// Non sha256 hash vs CID
 		{
 			name: "addCidSha3",
 			data: strFile(helloStr),
-			path: "/ipfs/bafkrmichjflejeh6aren53o7pig7zk3m3vxqcoc2i5dv326k3x6obh7jry",
+			path: "/btfs/bafkrmichjflejeh6aren53o7pig7zk3m3vxqcoc2i5dv326k3x6obh7jry",
 			opts: []options.UnixfsAddOption{options.Unixfs.Hash(mh.SHA3_256)},
 		},
 		{
@@ -196,38 +196,38 @@ func (tp *TestSuite) TestAdd(t *testing.T) {
 		{
 			name: "addInline",
 			data: strFile(helloStr),
-			path: "/ipfs/bafyaafikcmeaeeqnnbswy3dpfqqho33snrsccgan",
+			path: "/btfs/bafyaafikcmeaeeqnnbswy3dpfqqho33snrsccgan",
 			opts: []options.UnixfsAddOption{options.Unixfs.Inline(true)},
 		},
 		{
 			name: "addInlineLimit",
 			data: strFile(helloStr),
-			path: "/ipfs/bafyaafikcmeaeeqnnbswy3dpfqqho33snrsccgan",
+			path: "/btfs/bafyaafikcmeaeeqnnbswy3dpfqqho33snrsccgan",
 			opts: []options.UnixfsAddOption{options.Unixfs.InlineLimit(32), options.Unixfs.Inline(true)},
 		},
 		{
 			name: "addInlineZero",
 			data: strFile(""),
-			path: "/ipfs/bafkqaaa",
+			path: "/btfs/bafkqaaa",
 			opts: []options.UnixfsAddOption{options.Unixfs.InlineLimit(0), options.Unixfs.Inline(true), options.Unixfs.RawLeaves(true)},
 		},
-		{ //TODO: after coreapi add is used in `ipfs add`, consider making this default for inline
+		{ //TODO: after coreapi add is used in `btfs add`, consider making this default for inline
 			name: "addInlineRaw",
 			data: strFile(helloStr),
-			path: "/ipfs/bafkqadlimvwgy3zmeb3w64tmmqqq",
+			path: "/btfs/bafkqadlimvwgy3zmeb3w64tmmqqq",
 			opts: []options.UnixfsAddOption{options.Unixfs.InlineLimit(32), options.Unixfs.Inline(true), options.Unixfs.RawLeaves(true)},
 		},
 		// Chunker / Layout
 		{
 			name: "addChunks",
 			data: strFile(strings.Repeat("aoeuidhtns", 200)),
-			path: "/ipfs/QmRo11d4QJrST47aaiGVJYwPhoNA4ihRpJ5WaxBWjWDwbX",
+			path: "/btfs/QmRo11d4QJrST47aaiGVJYwPhoNA4ihRpJ5WaxBWjWDwbX",
 			opts: []options.UnixfsAddOption{options.Unixfs.Chunker("size-4")},
 		},
 		{
 			name: "addChunksTrickle",
 			data: strFile(strings.Repeat("aoeuidhtns", 200)),
-			path: "/ipfs/QmNNhDGttafX3M1wKWixGre6PrLFGjnoPEDXjBYpTv93HP",
+			path: "/btfs/QmNNhDGttafX3M1wKWixGre6PrLFGjnoPEDXjBYpTv93HP",
 			opts: []options.UnixfsAddOption{options.Unixfs.Chunker("size-4"), options.Unixfs.Layout(options.TrickleLayout)},
 		},
 		// Local
@@ -247,26 +247,26 @@ func (tp *TestSuite) TestAdd(t *testing.T) {
 		{
 			name: "simpleDirNoWrap",
 			data: flatDir,
-			path: "/ipfs/QmRKGpFfR32FVXdvJiHfo4WJ5TDYBsM1P9raAp1p6APWSp",
+			path: "/btfs/QmRKGpFfR32FVXdvJiHfo4WJ5TDYBsM1P9raAp1p6APWSp",
 		},
 		{
 			name:   "simpleDir",
 			data:   flatDir,
 			wrap:   "t",
 			expect: wrapped("t"),
-			path:   "/ipfs/Qmc3nGXm1HtUVCmnXLQHvWcNwfdZGpfg2SRm1CxLf7Q2Rm",
+			path:   "/btfs/Qmc3nGXm1HtUVCmnXLQHvWcNwfdZGpfg2SRm1CxLf7Q2Rm",
 		},
 		{
 			name:   "twoLevelDir",
 			data:   twoLevelDir(),
 			wrap:   "t",
 			expect: wrapped("t"),
-			path:   "/ipfs/QmPwsL3T5sWhDmmAWZHAzyjKtMVDS9a11aHNRqb3xoVnmg",
+			path:   "/btfs/QmPwsL3T5sWhDmmAWZHAzyjKtMVDS9a11aHNRqb3xoVnmg",
 		},
 		// wrapped
 		{
 			name: "addWrapped",
-			path: "/ipfs/QmVE9rNpj5doj7XHzp5zMUxD7BJgXEqx4pe3xZ3JBReWHE",
+			path: "/btfs/QmVE9rNpj5doj7XHzp5zMUxD7BJgXEqx4pe3xZ3JBReWHE",
 			data: func() files.Node {
 				return files.NewBytesFile([]byte(helloStr))
 			},
@@ -285,26 +285,26 @@ func (tp *TestSuite) TestAdd(t *testing.T) {
 			},
 			wrap:   "t",
 			expect: wrapped("t"),
-			path:   "/ipfs/QmPXLSBX382vJDLrGakcbrZDkU3grfkjMox7EgSC9KFbtQ",
+			path:   "/btfs/QmPXLSBX382vJDLrGakcbrZDkU3grfkjMox7EgSC9KFbtQ",
 		},
 		// NoCopy
 		{
 			name: "simpleNoCopy",
 			data: realFile,
-			path: "/ipfs/bafkreidi4zlleupgp2bvrpxyja5lbvi4mym7hz5bvhyoowby2qp7g2hxfa",
+			path: "/btfs/bafkreidi4zlleupgp2bvrpxyja5lbvi4mym7hz5bvhyoowby2qp7g2hxfa",
 			opts: []options.UnixfsAddOption{options.Unixfs.Nocopy(true)},
 		},
 		{
 			name: "noCopyNoRaw",
 			data: realFile,
-			path: "/ipfs/bafkreidi4zlleupgp2bvrpxyja5lbvi4mym7hz5bvhyoowby2qp7g2hxfa",
+			path: "/btfs/bafkreidi4zlleupgp2bvrpxyja5lbvi4mym7hz5bvhyoowby2qp7g2hxfa",
 			opts: []options.UnixfsAddOption{options.Unixfs.Nocopy(true), options.Unixfs.RawLeaves(false)},
 			err:  "nocopy option requires '--raw-leaves' to be enabled as well",
 		},
 		{
 			name: "noCopyNoPath",
 			data: strFile(helloStr),
-			path: "/ipfs/bafkreidi4zlleupgp2bvrpxyja5lbvi4mym7hz5bvhyoowby2qp7g2hxfa",
+			path: "/btfs/bafkreidi4zlleupgp2bvrpxyja5lbvi4mym7hz5bvhyoowby2qp7g2hxfa",
 			opts: []options.UnixfsAddOption{options.Unixfs.Nocopy(true)},
 			err:  helpers.ErrMissingFsRef.Error(),
 		},
@@ -312,7 +312,7 @@ func (tp *TestSuite) TestAdd(t *testing.T) {
 		{
 			name: "simpleAddEvent",
 			data: strFile(helloStr),
-			path: "/ipfs/bafkreidi4zlleupgp2bvrpxyja5lbvi4mym7hz5bvhyoowby2qp7g2hxfa",
+			path: "/btfs/bafkreidi4zlleupgp2bvrpxyja5lbvi4mym7hz5bvhyoowby2qp7g2hxfa",
 			events: []coreiface.AddEvent{
 				{Name: "bafkreidi4zlleupgp2bvrpxyja5lbvi4mym7hz5bvhyoowby2qp7g2hxfa", Path: p("bafkreidi4zlleupgp2bvrpxyja5lbvi4mym7hz5bvhyoowby2qp7g2hxfa"), Size: strconv.Itoa(len(helloStr))},
 			},
@@ -321,7 +321,7 @@ func (tp *TestSuite) TestAdd(t *testing.T) {
 		{
 			name: "silentAddEvent",
 			data: twoLevelDir(),
-			path: "/ipfs/QmVG2ZYCkV1S4TK8URA3a4RupBF17A8yAr4FqsRDXVJASr",
+			path: "/btfs/QmVG2ZYCkV1S4TK8URA3a4RupBF17A8yAr4FqsRDXVJASr",
 			events: []coreiface.AddEvent{
 				{Name: "abc", Path: p("QmU7nuGs2djqK99UNsNgEPGh6GV4662p6WtsgccBNGTDxt"), Size: "62"},
 				{Name: "", Path: p("QmVG2ZYCkV1S4TK8URA3a4RupBF17A8yAr4FqsRDXVJASr"), Size: "229"},
@@ -331,7 +331,7 @@ func (tp *TestSuite) TestAdd(t *testing.T) {
 		{
 			name: "dirAddEvents",
 			data: twoLevelDir(),
-			path: "/ipfs/QmVG2ZYCkV1S4TK8URA3a4RupBF17A8yAr4FqsRDXVJASr",
+			path: "/btfs/QmVG2ZYCkV1S4TK8URA3a4RupBF17A8yAr4FqsRDXVJASr",
 			events: []coreiface.AddEvent{
 				{Name: "abc/def", Path: p("QmNyJpQkU1cEkBwMDhDNFstr42q55mqG5GE5Mgwug4xyGk"), Size: "13"},
 				{Name: "bar", Path: p("QmS21GuXiRMvJKHos4ZkEmQDmRBqRaF5tQS2CQCu2ne9sY"), Size: "14"},
@@ -345,7 +345,7 @@ func (tp *TestSuite) TestAdd(t *testing.T) {
 			data: func() files.Node {
 				return files.NewReaderFile(bytes.NewReader(bytes.Repeat([]byte{0}, 1000000)))
 			},
-			path: "/ipfs/QmXXNNbwe4zzpdMg62ZXvnX1oU7MwSrQ3vAEtuwFKCm1oD",
+			path: "/btfs/QmXXNNbwe4zzpdMg62ZXvnX1oU7MwSrQ3vAEtuwFKCm1oD",
 			events: []coreiface.AddEvent{
 				{Name: "", Bytes: 262144},
 				{Name: "", Bytes: 524288},
