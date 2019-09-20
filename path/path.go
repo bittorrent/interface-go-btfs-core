@@ -122,7 +122,7 @@ func Join(base Path, a ...string) Path {
 // IpfsPath creates new /ipfs path from the provided CID
 func IpfsPath(c cid.Cid) Resolved {
 	return &resolvedPath{
-		path:      path{"/ipfs/" + c.String()},
+		path:      path{"/btfs/" + c.String()},
 		cid:       c,
 		root:      c,
 		remainder: "",
@@ -178,7 +178,7 @@ func (p *path) Namespace() string {
 
 func (p *path) Mutable() bool {
 	// TODO: MFS: check for /local
-	return p.Namespace() == "ipns"
+	return p.Namespace() == "btns"
 }
 
 func (p *path) IsValid() error {
