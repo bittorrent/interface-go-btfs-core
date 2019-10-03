@@ -138,7 +138,7 @@ func (tp *TestSuite) TestObjectData(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	r, err := api.Object().Data(ctx, p1)
+	r, _, err := api.Object().Data(ctx, p1, false)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -378,7 +378,7 @@ func (tp *TestSuite) TestObjectAddData(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	r, err := api.Object().Data(ctx, p2)
+	r, _, err := api.Object().Data(ctx, p2, false)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -411,7 +411,7 @@ func (tp *TestSuite) TestObjectSetData(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	r, err := api.Object().Data(ctx, p2)
+	r, _, err := api.Object().Data(ctx, p2, false)
 	if err != nil {
 		t.Fatal(err)
 	}
