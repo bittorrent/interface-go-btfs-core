@@ -79,7 +79,7 @@ type ObjectAPI interface {
 	Get(context.Context, path.Path) (ipld.Node, error)
 
 	// Data returns reader for data of the node
-	Data(context.Context, path.Path, bool) (io.Reader, io.Reader, error)
+	Data(context.Context, path.Path, bool, bool) (io.Reader, io.Reader, error)
 
 	// Links returns lint or links the node contains
 	Links(context.Context, path.Path) ([]*ipld.Link, error)
