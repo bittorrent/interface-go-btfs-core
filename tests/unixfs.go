@@ -22,7 +22,7 @@ import (
 	"github.com/TRON-US/go-unixfs"
 	"github.com/TRON-US/go-unixfs/importer/helpers"
 	"github.com/ipfs/go-cid"
-	"github.com/ipfs/go-ipfs-files"
+	"github.com/TRON-US/go-btfs-files"
 	cbor "github.com/ipfs/go-ipld-cbor"
 	mdag "github.com/ipfs/go-merkledag"
 	mh "github.com/multiformats/go-multihash"

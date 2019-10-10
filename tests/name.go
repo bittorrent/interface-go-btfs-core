@@ -9,7 +9,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ipfs/go-ipfs-files"
+	"github.com/TRON-US/go-btfs-files"
 	ipath "github.com/ipfs/go-path"
 
 	coreiface "github.com/TRON-US/interface-go-btfs-core"
