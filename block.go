@@ -23,6 +23,7 @@ type BlockAPI interface {
 	Put(context.Context, io.Reader, ...options.BlockPutOption) (BlockStat, error)
 
 	// Get attempts to resolve the path and return a reader for data in the block
+	// The bool parameter indicates whether token metadata should be returned.
 	Get(context.Context, path.Path, bool) (io.Reader, error)
 
 	// Rm removes the block specified by the path from local blockstore.

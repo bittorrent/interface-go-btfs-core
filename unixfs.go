@@ -70,7 +70,8 @@ type UnixfsAPI interface {
 	// Get returns a read-only handle to a file tree referenced by a path
 	//
 	// Note that some implementations of this API may apply the specified context
-	// to operations performed on the returned file
+	// to operations performed on the returned file.
+	// The bool parameter indicates whether token metadata should be returned.
 	Get(context.Context, path.Path, bool) (files.Node, error)
 
 	// Ls returns the list of links in a directory. Links aren't guaranteed to be
