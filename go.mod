@@ -2,7 +2,7 @@ module github.com/TRON-US/interface-go-btfs-core
 
 require (
 	github.com/TRON-US/go-btfs-files v0.1.1
-	github.com/TRON-US/go-unixfs v0.4.1
+	github.com/TRON-US/go-unixfs v0.4.4
 	github.com/ipfs/go-cid v0.0.2
 	github.com/ipfs/go-ipld-cbor v0.0.2
 	github.com/ipfs/go-ipld-format v0.0.2

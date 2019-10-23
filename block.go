@@ -23,7 +23,7 @@ type BlockAPI interface {
 	Put(context.Context, io.Reader, ...options.BlockPutOption) (BlockStat, error)
 
 	// Get attempts to resolve the path and return a reader for data in the block
-	Get(context.Context, path.Path) (io.Reader, error)
+	Get(context.Context, path.Path, bool) (io.Reader, error)
 
 	// Rm removes the block specified by the path from local blockstore.
 	// By default an error will be returned if the block can't be found locally.

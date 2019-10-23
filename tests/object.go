@@ -56,7 +56,7 @@ func (tp *TestSuite) TestNew(t *testing.T) {
 		t.Errorf("Unexpected emptyNode path: %s", emptyNode.String())
 	}
 
-	if dirNode.String() != "QmdUmxr5nZmSiHxbPR5LKzEPPBxJR878Eoh7JSqmJLPjbx" {
+	if dirNode.String() != "QmUNLLsPACCz1vLxQVkXqqLX5R1X345qqfHbsf67hvA3Nn" {
 		t.Errorf("Unexpected dirNode path: %s", dirNode.String())
 	}
 }
@@ -115,7 +115,7 @@ func (tp *TestSuite) TestObjectGet(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	nd, err := api.Object().Get(ctx, p1)
+	nd, err := api.Object().Get(ctx, p1, false)
 	if err != nil {
 		t.Fatal(err)
 	}

@@ -97,7 +97,7 @@ func (tp *TestSuite) TestBlockGet(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	r, err := api.Block().Get(ctx, res.Path())
+	r, err := api.Block().Get(ctx, res.Path(), false)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -135,7 +135,7 @@ func (tp *TestSuite) TestBlockRm(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	r, err := api.Block().Get(ctx, res.Path())
+	r, err := api.Block().Get(ctx, res.Path(), false)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -154,7 +154,7 @@ func (tp *TestSuite) TestBlockRm(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	_, err = api.Block().Get(ctx, res.Path())
+	_, err = api.Block().Get(ctx, res.Path(), false)
 	if err == nil {
 		t.Error("expected err to exist")
 	}

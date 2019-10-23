@@ -5,8 +5,8 @@ import (
 	"github.com/TRON-US/interface-go-btfs-core/options"
 	path "github.com/TRON-US/interface-go-btfs-core/path"
 
-	"github.com/ipfs/go-cid"
 	"github.com/TRON-US/go-btfs-files"
+	"github.com/ipfs/go-cid"
 )
 
 type AddEvent struct {
@@ -71,7 +71,7 @@ type UnixfsAPI interface {
 	//
 	// Note that some implementations of this API may apply the specified context
 	// to operations performed on the returned file
-	Get(context.Context, path.Path) (files.Node, error)
+	Get(context.Context, path.Path, bool) (files.Node, error)
 
 	// Ls returns the list of links in a directory. Links aren't guaranteed to be
 	// returned in order
