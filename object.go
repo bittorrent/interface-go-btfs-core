@@ -76,7 +76,7 @@ type ObjectAPI interface {
 	Put(context.Context, io.Reader, ...options.ObjectPutOption) (path.Resolved, error)
 
 	// Get returns the node for the path
-	Get(context.Context, path.Path) (ipld.Node, error)
+	Get(context.Context, path.Path, bool) (ipld.Node, error)
 
 	// Data returns reader for data of the node
 	Data(context.Context, path.Path, bool, bool) (io.Reader, io.Reader, error)

@@ -19,10 +19,10 @@ import (
 	coreiface "github.com/TRON-US/interface-go-btfs-core"
 	"github.com/TRON-US/interface-go-btfs-core/options"
 
+	"github.com/TRON-US/go-btfs-files"
 	"github.com/TRON-US/go-unixfs"
 	"github.com/TRON-US/go-unixfs/importer/helpers"
 	"github.com/ipfs/go-cid"
-	"github.com/TRON-US/go-btfs-files"
 	cbor "github.com/ipfs/go-ipld-cbor"
 	mdag "github.com/ipfs/go-merkledag"
 	mh "github.com/multiformats/go-multihash"
@@ -51,11 +51,11 @@ func (tp *TestSuite) TestUnixfs(t *testing.T) {
 }
 
 // `echo -n 'hello, world!' | btfs add`
-var hello = "/btfs/QmYrN7htkAWgspb7DeopHRf1f8NvEU6NWFhm2d8Jt9z8L2"
+var hello = "/btfs/QmQy2Dw4Wk7rdJKjThjYXzfFJNaRKRHhHP5gHHXroJMYxk"
 var helloStr = "hello, world!"
 
 // `echo -n | btfs add`
-var emptyFile = "/btfs/QmcvBLpj4FYdgJhvBqrDQpcZsoXv1sHb3Qc8uhGBdhfgeV"
+var emptyFile = "/btfs/QmbFMke1KXqnYyBBWxB74N4c5SBnJMVAiMNRcGu6x1AwQH"
 
 func strFile(data string) func() files.Node {
 	return func() files.Node {
@@ -176,7 +176,7 @@ func (tp *TestSuite) TestAdd(t *testing.T) {
 		{
 			name: "addCidV1NoLeaves",
 			data: strFile(helloStr),
-			path: "/btfs/bafybeie4ggebs5wjz7ljbbfsde5nvhjw6p3fl5g3tu7w5mfkx5zs2vfmkm",
+			path: "/btfs/bafybeibhbcn7k7o2m6xsqkrlfiokod3nxwe47viteynhruh6uqx7hvkjfu",
 			opts: []options.UnixfsAddOption{options.Unixfs.CidVersion(1), options.Unixfs.RawLeaves(false)},
 		},
 		// Non sha256 hash vs CID
@@ -196,13 +196,13 @@ func (tp *TestSuite) TestAdd(t *testing.T) {
 		{
 			name: "addInline",
 			data: strFile(helloStr),
-			path: "/btfs/bafyaafykcueaeeaaeigwqzlmnrxsyidxn5zgyzbbfagq",
+			path: "/btfs/bafyaafikcmeaeeqnnbswy3dpfqqho33snrsccgan",
 			opts: []options.UnixfsAddOption{options.Unixfs.Inline(true)},
 		},
 		{
 			name: "addInlineLimit",
 			data: strFile(helloStr),
-			path: "/btfs/bafyaafykcueaeeaaeigwqzlmnrxsyidxn5zgyzbbfagq",
+			path: "/btfs/bafyaafikcmeaeeqnnbswy3dpfqqho33snrsccgan",
 			opts: []options.UnixfsAddOption{options.Unixfs.InlineLimit(32), options.Unixfs.Inline(true)},
 		},
 		{
@@ -221,13 +221,13 @@ func (tp *TestSuite) TestAdd(t *testing.T) {
 		{
 			name: "addChunks",
 			data: strFile(strings.Repeat("aoeuidhtns", 200)),
-			path: "/btfs/QmQ5umPANRzEFNvMNX7AAb79xpoBrAyTw7rWWFe19rSMJh",
+			path: "/btfs/QmRo11d4QJrST47aaiGVJYwPhoNA4ihRpJ5WaxBWjWDwbX",
 			opts: []options.UnixfsAddOption{options.Unixfs.Chunker("size-4")},
 		},
 		{
 			name: "addChunksTrickle",
 			data: strFile(strings.Repeat("aoeuidhtns", 200)),
-			path: "/btfs/QmZ6G1DKPUsUrHwLbQ49N2R3gmf1WE7dskSq32kDwj4fMA",
+			path: "/btfs/QmNNhDGttafX3M1wKWixGre6PrLFGjnoPEDXjBYpTv93HP",
 			opts: []options.UnixfsAddOption{options.Unixfs.Chunker("size-4"), options.Unixfs.Layout(options.TrickleLayout)},
 		},
 		// Local
@@ -247,26 +247,26 @@ func (tp *TestSuite) TestAdd(t *testing.T) {
 		{
 			name: "simpleDirNoWrap",
 			data: flatDir,
-			path: "/btfs/QmPUSH4LViRbRSmjyarpkyV8iK8BeAM3DsyzWRYWuvTv7M",
+			path: "/btfs/QmRKGpFfR32FVXdvJiHfo4WJ5TDYBsM1P9raAp1p6APWSp",
 		},
 		{
 			name:   "simpleDir",
 			data:   flatDir,
 			wrap:   "t",
 			expect: wrapped("t"),
-			path:   "/btfs/QmcfEzKcMj1GqcdBenuNzVPKxDAKbp9JZD1MQJm6qfs3Sw",
+			path:   "/btfs/Qmc3nGXm1HtUVCmnXLQHvWcNwfdZGpfg2SRm1CxLf7Q2Rm",
 		},
 		{
 			name:   "twoLevelDir",
 			data:   twoLevelDir(),
 			wrap:   "t",
 			expect: wrapped("t"),
-			path:   "/btfs/QmVkm839EyArzz2NQ38ji96hTHpBantFQ687FY4EvBPs2X",
+			path:   "/btfs/QmPwsL3T5sWhDmmAWZHAzyjKtMVDS9a11aHNRqb3xoVnmg",
 		},
 		// wrapped
 		{
 			name: "addWrapped",
-			path: "/btfs/QmbRGmoTJbyakYi1MAWE8WEApna1Y8th2Sch3GPg4cxEyj",
+			path: "/btfs/QmVE9rNpj5doj7XHzp5zMUxD7BJgXEqx4pe3xZ3JBReWHE",
 			data: func() files.Node {
 				return files.NewBytesFile([]byte(helloStr))
 			},
@@ -285,7 +285,7 @@ func (tp *TestSuite) TestAdd(t *testing.T) {
 			},
 			wrap:   "t",
 			expect: wrapped("t"),
-			path:   "/btfs/QmWjZUcTZq9zdZPmSxSDMvNkUaj95Q9gSYW9eM4A6BSTkp",
+			path:   "/btfs/QmPXLSBX382vJDLrGakcbrZDkU3grfkjMox7EgSC9KFbtQ",
 		},
 		// NoCopy
 		{
@@ -321,23 +321,23 @@ func (tp *TestSuite) TestAdd(t *testing.T) {
 		{
 			name: "silentAddEvent",
 			data: twoLevelDir(),
-			path: "/btfs/QmUWSYL1MBKZxrvPY75mHMp9LQrgDnhJpAiF8Suhktu76E",
+			path: "/btfs/QmVG2ZYCkV1S4TK8URA3a4RupBF17A8yAr4FqsRDXVJASr",
 			events: []coreiface.AddEvent{
-				{Name: "abc", Path: p("QmW6A3sc4u9k6XoiNGDHfNr3F3AnBsTZoPtdq9s5UEZh8y"), Size: "66"},
-				{Name: "", Path: p("QmUWSYL1MBKZxrvPY75mHMp9LQrgDnhJpAiF8Suhktu76E"), Size: "239"},
+				{Name: "abc", Path: p("QmU7nuGs2djqK99UNsNgEPGh6GV4662p6WtsgccBNGTDxt"), Size: "62"},
+				{Name: "", Path: p("QmVG2ZYCkV1S4TK8URA3a4RupBF17A8yAr4FqsRDXVJASr"), Size: "229"},
 			},
 			opts: []options.UnixfsAddOption{options.Unixfs.Silent(true)},
 		},
 		{
 			name: "dirAddEvents",
 			data: twoLevelDir(),
-			path: "/btfs/QmUWSYL1MBKZxrvPY75mHMp9LQrgDnhJpAiF8Suhktu76E",
+			path: "/btfs/QmVG2ZYCkV1S4TK8URA3a4RupBF17A8yAr4FqsRDXVJASr",
 			events: []coreiface.AddEvent{
-				{Name: "abc/def", Path: p("QmSv8G1Vj9nRptSZHffNfrd446Rp37bdmRC8XifaPDtMjE"), Size: "15"},
-				{Name: "bar", Path: p("Qmdh1om4CVHZd5buSUrwmo1vJdvopr8P1uJ3G314WYW1af"), Size: "16"},
-				{Name: "foo", Path: p("Qmbz2euFDCf1LFQGNcB1UrR6LkMukA3YuFJjpEbeqp5AmD"), Size: "16"},
-				{Name: "abc", Path: p("QmW6A3sc4u9k6XoiNGDHfNr3F3AnBsTZoPtdq9s5UEZh8y"), Size: "66"},
-				{Name: "", Path: p("QmUWSYL1MBKZxrvPY75mHMp9LQrgDnhJpAiF8Suhktu76E"), Size: "239"},
+				{Name: "abc/def", Path: p("QmNyJpQkU1cEkBwMDhDNFstr42q55mqG5GE5Mgwug4xyGk"), Size: "13"},
+				{Name: "bar", Path: p("QmS21GuXiRMvJKHos4ZkEmQDmRBqRaF5tQS2CQCu2ne9sY"), Size: "14"},
+				{Name: "foo", Path: p("QmfAjGiVpTN56TXi6SBQtstit5BEw3sijKj1Qkxn6EXKzJ"), Size: "14"},
+				{Name: "abc", Path: p("QmU7nuGs2djqK99UNsNgEPGh6GV4662p6WtsgccBNGTDxt"), Size: "62"},
+				{Name: "", Path: p("QmVG2ZYCkV1S4TK8URA3a4RupBF17A8yAr4FqsRDXVJASr"), Size: "229"},
 			},
 		},
 		{
@@ -345,13 +345,13 @@ func (tp *TestSuite) TestAdd(t *testing.T) {
 			data: func() files.Node {
 				return files.NewReaderFile(bytes.NewReader(bytes.Repeat([]byte{0}, 1000000)))
 			},
-			path: "/btfs/QmXVurzrrN1p1XV6VF31i6UushjCvhofm9tKmMMUfQSzry",
+			path: "/btfs/QmXXNNbwe4zzpdMg62ZXvnX1oU7MwSrQ3vAEtuwFKCm1oD",
 			events: []coreiface.AddEvent{
 				{Name: "", Bytes: 262144},
 				{Name: "", Bytes: 524288},
 				{Name: "", Bytes: 786432},
 				{Name: "", Bytes: 1000000},
-				{Name: "QmXVurzrrN1p1XV6VF31i6UushjCvhofm9tKmMMUfQSzry", Path: p("QmXVurzrrN1p1XV6VF31i6UushjCvhofm9tKmMMUfQSzry"), Size: "1000266"},
+				{Name: "QmXXNNbwe4zzpdMg62ZXvnX1oU7MwSrQ3vAEtuwFKCm1oD", Path: p("QmXXNNbwe4zzpdMg62ZXvnX1oU7MwSrQ3vAEtuwFKCm1oD"), Size: "1000256"},
 			},
 			wrap: "",
 			opts: []options.UnixfsAddOption{options.Unixfs.Progress(true)},
@@ -513,7 +513,7 @@ func (tp *TestSuite) TestAdd(t *testing.T) {
 				}
 			}
 
-			f, err := tapi.Unixfs().Get(ctx, p)
+			f, err := tapi.Unixfs().Get(ctx, p, false)
 			if err != nil {
 				t.Fatal(err)
 			}
@@ -549,7 +549,7 @@ func (tp *TestSuite) TestAddPinned(t *testing.T) {
 		t.Fatalf("expected 1 pin, got %d", len(pins))
 	}
 
-	if pins[0].Path().String() != "/ipld/QmYrN7htkAWgspb7DeopHRf1f8NvEU6NWFhm2d8Jt9z8L2" {
+	if pins[0].Path().String() != "/ipld/QmQy2Dw4Wk7rdJKjThjYXzfFJNaRKRHhHP5gHHXroJMYxk" {
 		t.Fatalf("got unexpected pin: %s", pins[0].Path().String())
 	}
 }
@@ -571,7 +571,7 @@ func (tp *TestSuite) TestAddHashOnly(t *testing.T) {
 		t.Errorf("unxepected path: %s", p.String())
 	}
 
-	_, err = api.Block().Get(ctx, p)
+	_, err = api.Block().Get(ctx, p, false)
 	if err == nil {
 		t.Fatal("expected an error")
 	}
@@ -595,7 +595,7 @@ func (tp *TestSuite) TestGetEmptyFile(t *testing.T) {
 
 	emptyFilePath := path.New(emptyFile)
 
-	r, err := api.Unixfs().Get(ctx, emptyFilePath)
+	r, err := api.Unixfs().Get(ctx, emptyFilePath, false)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -633,7 +633,7 @@ func (tp *TestSuite) TestGetDir(t *testing.T) {
 		t.Fatalf("expected path %s, got: %s", emptyDir.Cid(), p.String())
 	}
 
-	r, err := api.Unixfs().Get(ctx, path.IpfsPath(emptyDir.Cid()))
+	r, err := api.Unixfs().Get(ctx, path.IpfsPath(emptyDir.Cid()), false)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -657,7 +657,7 @@ func (tp *TestSuite) TestGetNonUnixfs(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	_, err = api.Unixfs().Get(ctx, path.IpfsPath(nd.Cid()))
+	_, err = api.Unixfs().Get(ctx, path.IpfsPath(nd.Cid()), false)
 	if !strings.Contains(err.Error(), "proto: required field") {
 		t.Fatalf("expected protobuf error, got: %s", err)
 	}
@@ -698,8 +698,8 @@ func (tp *TestSuite) TestLs(t *testing.T) {
 	if entry.Type != coreiface.TFile {
 		t.Errorf("wrong type %s", entry.Type)
 	}
-	if entry.Cid.String() != "QmdMMJFEw4Kb32aLPqtEUP8P4vWEeVYNg2U1UAdrmuGdtW" {
-		t.Errorf("expected cid = QmdMMJFEw4Kb32aLPqtEUP8P4vWEeVYNg2U1UAdrmuGdtW, got %s", entry.Cid)
+	if entry.Cid.String() != "QmX3qQVKxDGz3URVC3861Z3CKtQKGBn6ffXRBBWGMFz9Lr" {
+		t.Errorf("expected cid = QmX3qQVKxDGz3URVC3861Z3CKtQKGBn6ffXRBBWGMFz9Lr, got %s", entry.Cid)
 	}
 	entry = <-entries
 	if entry.Err != nil {
@@ -741,7 +741,7 @@ func (tp *TestSuite) TestEntriesExpired(t *testing.T) {
 
 	ctx, cancel = context.WithCancel(ctx)
 
-	nd, err := api.Unixfs().Get(ctx, p)
+	nd, err := api.Unixfs().Get(ctx, p, false)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -907,7 +907,7 @@ func (tp *TestSuite) TestGetSeek(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	r, err := api.Unixfs().Get(ctx, p)
+	r, err := api.Unixfs().Get(ctx, p, false)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -925,7 +925,7 @@ func (tp *TestSuite) TestGetSeek(t *testing.T) {
 
 	origR := bytes.NewReader(orig)
 
-	r, err = api.Unixfs().Get(ctx, p)
+	r, err = api.Unixfs().Get(ctx, p, false)
 	if err != nil {
 		t.Fatal(err)
 	}
