@@ -38,6 +38,15 @@ type UnixfsAddSettings struct {
 	Events   chan<- interface{}
 	Silent   bool
 	Progress bool
+
+	Encrypt bool
+	Pubkey  string
+	PeerId  string
+}
+
+type UnixfsGetSettings struct {
+	Decrypt    bool
+	PrivateKey string
 }
 
 type UnixfsLsSettings struct {
@@ -45,6 +54,7 @@ type UnixfsLsSettings struct {
 }
 
 type UnixfsAddOption func(*UnixfsAddSettings) error
+type UnixfsGetOption func(*UnixfsGetSettings) error
 type UnixfsLsOption func(*UnixfsLsSettings) error
 
 func UnixfsAddOptions(opts ...UnixfsAddOption) (*UnixfsAddSettings, cid.Prefix, error) {
@@ -70,6 +80,10 @@ func UnixfsAddOptions(opts ...UnixfsAddOption) (*UnixfsAddSettings, cid.Prefix, 
 		Events:   nil,
 		Silent:   false,
 		Progress: false,
+
+		Encrypt: false,
+		Pubkey:  "",
+		PeerId:  "",
 	}
 
 	for _, opt := range opts {
@@ -123,6 +137,20 @@ func UnixfsAddOptions(opts ...UnixfsAddOption) (*UnixfsAddSettings, cid.Prefix, 
 	return options, prefix, nil
 }
 
+func UnixfsGetOptions(opts ...UnixfsGetOption) (*UnixfsGetSettings, error) {
+	options := &UnixfsGetSettings{
+		Decrypt:    false,
+		PrivateKey: "",
+	}
+	for _, opt := range opts {
+		err := opt(options)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return options, nil
+}
+
 func UnixfsLsOptions(opts ...UnixfsLsOption) (*UnixfsLsSettings, error) {
 	options := &UnixfsLsSettings{
 		ResolveChildren: true,
@@ -136,6 +164,41 @@ func UnixfsLsOptions(opts ...UnixfsLsOption) (*UnixfsLsSettings, error) {
 	}
 
 	return options, nil
+}
+
+func (unixfsOpts) Encrypt(encrypt bool) UnixfsAddOption {
+	return func(settings *UnixfsAddSettings) error {
+		settings.Encrypt = encrypt
+		return nil
+	}
+}
+
+func (unixfsOpts) Pubkey(pubkey string) UnixfsAddOption {
+	return func(settings *UnixfsAddSettings) error {
+		settings.Pubkey = pubkey
+		return nil
+	}
+}
+
+func (unixfsOpts) PeerId(peerId string) UnixfsAddOption {
+	return func(settings *UnixfsAddSettings) error {
+		settings.PeerId = peerId
+		return nil
+	}
+}
+
+func (unixfsOpts) Decrypt(decrypt bool) UnixfsGetOption {
+	return func(settings *UnixfsGetSettings) error {
+		settings.Decrypt = decrypt
+		return nil
+	}
+}
+
+func (unixfsOpts) PrivateKey(privateKey string) UnixfsGetOption {
+	return func(settings *UnixfsGetSettings) error {
+		settings.PrivateKey = privateKey
+		return nil
+	}
 }
 
 type unixfsOpts struct{}

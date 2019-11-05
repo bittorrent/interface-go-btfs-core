@@ -72,7 +72,7 @@ type UnixfsAPI interface {
 	// Note that some implementations of this API may apply the specified context
 	// to operations performed on the returned file.
 	// The bool parameter indicates whether token metadata should be returned.
-	Get(context.Context, path.Path, bool) (files.Node, error)
+	Get(context.Context, path.Path, bool, ...options.UnixfsGetOption) (files.Node, error)
 
 	// Ls returns the list of links in a directory. Links aren't guaranteed to be
 	// returned in order
