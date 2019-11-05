@@ -146,8 +146,8 @@ func UnixfsGetOptions(opts ...UnixfsGetOption) (*UnixfsGetSettings, error) {
 		err := opt(options)
 		if err != nil {
 			return nil, err
-			}
 		}
+	}
 	return options, nil
 }
 
