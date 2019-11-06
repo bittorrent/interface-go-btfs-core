@@ -74,6 +74,10 @@ type UnixfsAPI interface {
 	// The bool parameter indicates whether token metadata should be returned.
 	Get(context.Context, path.Path, bool, ...options.UnixfsGetOption) (files.Node, error)
 
+	// GetMetadata returns full metadata bytes within a UnixFS file referenced by path.
+	// If metadata is not available, it returns an error.
+	GetMetadata(context.Context, path.Path) ([]byte, error)
+
 	// Ls returns the list of links in a directory. Links aren't guaranteed to be
 	// returned in order
 	Ls(context.Context, path.Path, ...options.UnixfsLsOption) (<-chan DirEntry, error)
