@@ -53,9 +53,24 @@ type UnixfsLsSettings struct {
 	ResolveChildren bool
 }
 
+type UnixfsAddMetaSettings struct {
+	Pin      	bool
+	Overwrite  	bool
+	Events   chan<- interface{}
+	Silent   bool
+}
+
+type UnixfsRemoveMetaSettings struct {
+	Pin      bool
+	Events   chan<- interface{}
+	Silent   bool
+}
+
 type UnixfsAddOption func(*UnixfsAddSettings) error
 type UnixfsGetOption func(*UnixfsGetSettings) error
 type UnixfsLsOption func(*UnixfsLsSettings) error
+type UnixfsAddMetaOption func(*UnixfsAddMetaSettings) error
+type UnixfsRemoveMetaOption func(*UnixfsRemoveMetaSettings) error
 
 func UnixfsAddOptions(opts ...UnixfsAddOption) (*UnixfsAddSettings, cid.Prefix, error) {
 	options := &UnixfsAddSettings{
@@ -154,6 +169,41 @@ func UnixfsGetOptions(opts ...UnixfsGetOption) (*UnixfsGetSettings, error) {
 func UnixfsLsOptions(opts ...UnixfsLsOption) (*UnixfsLsSettings, error) {
 	options := &UnixfsLsSettings{
 		ResolveChildren: true,
+	}
+
+	for _, opt := range opts {
+		err := opt(options)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	return options, nil
+}
+
+func UnixfsAddMetaOptions(opts ...UnixfsAddMetaOption) (*UnixfsAddMetaSettings, error) {
+	options := &UnixfsAddMetaSettings{
+		Pin:      false,
+		Events:   nil,
+		Silent:   false,
+		Overwrite: false,
+	}
+
+	for _, opt := range opts {
+		err := opt(options)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	return options, nil
+}
+
+func UnixfsRemoveMetaOptions(opts ...UnixfsRemoveMetaOption) (*UnixfsRemoveMetaSettings, error) {
+	options := &UnixfsRemoveMetaSettings{
+		Pin:      false,
+		Events:   nil,
+		Silent:   false,		
 	}
 
 	for _, opt := range opts {
@@ -355,6 +405,38 @@ func (unixfsOpts) Nocopy(enable bool) UnixfsAddOption {
 func (unixfsOpts) ResolveChildren(resolve bool) UnixfsLsOption {
 	return func(settings *UnixfsLsSettings) error {
 		settings.ResolveChildren = resolve
+		return nil
+	}
+}
+
+// Pin tells the meta modifier to pin the file root after adding metadata items
+func (unixfsOpts) PinToAdd(pin bool) UnixfsAddMetaOption {
+	return func(settings *UnixfsAddMetaSettings) error {
+		settings.Pin = pin
+		return nil
+	}
+}
+
+func (unixfsOpts) OverwriteToAdd(overwrite bool) UnixfsAddMetaOption {
+	return func(settings *UnixfsAddMetaSettings) error {
+		settings.Overwrite = overwrite
+		return nil
+	}
+}
+
+// Events specifies channel which will be used to report events about ongoing
+// Add operation.
+func (unixfsOpts) EventsToAdd(sink chan<- interface{}) UnixfsAddMetaOption {
+	return func(settings *UnixfsAddMetaSettings) error {
+		settings.Events = sink
+		return nil
+	}
+}
+
+// Pin tells the meta modifier to pin the file root after removing metadata items
+func (unixfsOpts) PinToRemove(pin bool) UnixfsRemoveMetaOption {
+	return func(settings *UnixfsRemoveMetaSettings) error {
+		settings.Pin = pin
 		return nil
 	}
 }

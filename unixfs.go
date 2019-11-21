@@ -4,7 +4,7 @@ import (
 	"context"
 	"github.com/TRON-US/interface-go-btfs-core/options"
 	path "github.com/TRON-US/interface-go-btfs-core/path"
-
+	
 	"github.com/TRON-US/go-btfs-files"
 	"github.com/ipfs/go-cid"
 )
@@ -81,4 +81,10 @@ type UnixfsAPI interface {
 	// Ls returns the list of links in a directory. Links aren't guaranteed to be
 	// returned in order
 	Ls(context.Context, path.Path, ...options.UnixfsLsOption) (<-chan DirEntry, error)
+
+	// AppendMetadata imports metadata into merkledag file.
+	AddMetadata(context.Context, path.Path, string, ...options.UnixfsAddMetaOption) (path.Resolved, error)
+
+	// UpdateMetadata updates merkledag file metadata.
+	RemoveMetadata(context.Context, path.Path, string, ...options.UnixfsRemoveMetaOption) (path.Resolved, error)
 }
