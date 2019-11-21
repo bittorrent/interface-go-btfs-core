@@ -186,6 +186,7 @@ func UnixfsAddMetaOptions(opts ...UnixfsAddMetaOption) (*UnixfsAddMetaSettings, 
 		Pin:      false,
 		Events:   nil,
 		Silent:   false,
+		Overwrite: false,
 	}
 
 	for _, opt := range opts {
