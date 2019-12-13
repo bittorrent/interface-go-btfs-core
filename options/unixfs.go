@@ -47,6 +47,8 @@ type UnixfsAddSettings struct {
 type UnixfsGetSettings struct {
 	Decrypt    bool
 	PrivateKey string
+	Metadata   bool
+	Repairs    []cid.Cid
 }
 
 type UnixfsLsSettings struct {
@@ -54,16 +56,16 @@ type UnixfsLsSettings struct {
 }
 
 type UnixfsAddMetaSettings struct {
-	Pin      	bool
-	Overwrite  	bool
-	Events   chan<- interface{}
-	Silent   bool
+	Pin       bool
+	Overwrite bool
+	Events    chan<- interface{}
+	Silent    bool
 }
 
 type UnixfsRemoveMetaSettings struct {
-	Pin      bool
-	Events   chan<- interface{}
-	Silent   bool
+	Pin    bool
+	Events chan<- interface{}
+	Silent bool
 }
 
 type UnixfsAddOption func(*UnixfsAddSettings) error
@@ -156,6 +158,8 @@ func UnixfsGetOptions(opts ...UnixfsGetOption) (*UnixfsGetSettings, error) {
 	options := &UnixfsGetSettings{
 		Decrypt:    false,
 		PrivateKey: "",
+		Metadata:   false,
+		Repairs:    nil,
 	}
 	for _, opt := range opts {
 		err := opt(options)
@@ -183,9 +187,9 @@ func UnixfsLsOptions(opts ...UnixfsLsOption) (*UnixfsLsSettings, error) {
 
 func UnixfsAddMetaOptions(opts ...UnixfsAddMetaOption) (*UnixfsAddMetaSettings, error) {
 	options := &UnixfsAddMetaSettings{
-		Pin:      false,
-		Events:   nil,
-		Silent:   false,
+		Pin:       false,
+		Events:    nil,
+		Silent:    false,
 		Overwrite: false,
 	}
 
@@ -201,9 +205,9 @@ func UnixfsAddMetaOptions(opts ...UnixfsAddMetaOption) (*UnixfsAddMetaSettings, 
 
 func UnixfsRemoveMetaOptions(opts ...UnixfsRemoveMetaOption) (*UnixfsRemoveMetaSettings, error) {
 	options := &UnixfsRemoveMetaSettings{
-		Pin:      false,
-		Events:   nil,
-		Silent:   false,		
+		Pin:    false,
+		Events: nil,
+		Silent: false,
 	}
 
 	for _, opt := range opts {
@@ -247,6 +251,20 @@ func (unixfsOpts) Decrypt(decrypt bool) UnixfsGetOption {
 func (unixfsOpts) PrivateKey(privateKey string) UnixfsGetOption {
 	return func(settings *UnixfsGetSettings) error {
 		settings.PrivateKey = privateKey
+		return nil
+	}
+}
+
+func (unixfsOpts) Metadata(metadata bool) UnixfsGetOption {
+	return func(settings *UnixfsGetSettings) error {
+		settings.Metadata = metadata
+		return nil
+	}
+}
+
+func (unixfsOpts) Repairs(repairs []cid.Cid) UnixfsGetOption {
+	return func(settings *UnixfsGetSettings) error {
+		settings.Repairs = repairs
 		return nil
 	}
 }
