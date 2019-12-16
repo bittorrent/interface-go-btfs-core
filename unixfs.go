@@ -4,7 +4,7 @@ import (
 	"context"
 	"github.com/TRON-US/interface-go-btfs-core/options"
 	path "github.com/TRON-US/interface-go-btfs-core/path"
-	
+
 	"github.com/TRON-US/go-btfs-files"
 	"github.com/ipfs/go-cid"
 )
@@ -71,8 +71,7 @@ type UnixfsAPI interface {
 	//
 	// Note that some implementations of this API may apply the specified context
 	// to operations performed on the returned file.
-	// The bool parameter indicates whether token metadata should be returned.
-	Get(context.Context, path.Path, bool, ...options.UnixfsGetOption) (files.Node, error)
+	Get(context.Context, path.Path, ...options.UnixfsGetOption) (files.Node, error)
 
 	// GetMetadata returns full metadata bytes within a UnixFS file referenced by path.
 	// If metadata is not available, it returns an error.
