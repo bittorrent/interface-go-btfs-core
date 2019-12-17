@@ -513,7 +513,7 @@ func (tp *TestSuite) TestAdd(t *testing.T) {
 				}
 			}
 
-			f, err := tapi.Unixfs().Get(ctx, p, false)
+			f, err := tapi.Unixfs().Get(ctx, p)
 			if err != nil {
 				t.Fatal(err)
 			}
@@ -595,7 +595,7 @@ func (tp *TestSuite) TestGetEmptyFile(t *testing.T) {
 
 	emptyFilePath := path.New(emptyFile)
 
-	r, err := api.Unixfs().Get(ctx, emptyFilePath, false)
+	r, err := api.Unixfs().Get(ctx, emptyFilePath)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -633,7 +633,7 @@ func (tp *TestSuite) TestGetDir(t *testing.T) {
 		t.Fatalf("expected path %s, got: %s", emptyDir.Cid(), p.String())
 	}
 
-	r, err := api.Unixfs().Get(ctx, path.IpfsPath(emptyDir.Cid()), false)
+	r, err := api.Unixfs().Get(ctx, path.IpfsPath(emptyDir.Cid()))
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -657,7 +657,7 @@ func (tp *TestSuite) TestGetNonUnixfs(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	_, err = api.Unixfs().Get(ctx, path.IpfsPath(nd.Cid()), false)
+	_, err = api.Unixfs().Get(ctx, path.IpfsPath(nd.Cid()))
 	if !strings.Contains(err.Error(), "proto: required field") {
 		t.Fatalf("expected protobuf error, got: %s", err)
 	}
@@ -741,7 +741,7 @@ func (tp *TestSuite) TestEntriesExpired(t *testing.T) {
 
 	ctx, cancel = context.WithCancel(ctx)
 
-	nd, err := api.Unixfs().Get(ctx, p, false)
+	nd, err := api.Unixfs().Get(ctx, p)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -907,7 +907,7 @@ func (tp *TestSuite) TestGetSeek(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	r, err := api.Unixfs().Get(ctx, p, false)
+	r, err := api.Unixfs().Get(ctx, p)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -925,7 +925,7 @@ func (tp *TestSuite) TestGetSeek(t *testing.T) {
 
 	origR := bytes.NewReader(orig)
 
-	r, err = api.Unixfs().Get(ctx, p, false)
+	r, err = api.Unixfs().Get(ctx, p)
 	if err != nil {
 		t.Fatal(err)
 	}
