@@ -3,6 +3,7 @@ package iface
 import (
 	"context"
 	path "github.com/TRON-US/interface-go-btfs-core/path"
+	"time"
 
 	"github.com/TRON-US/interface-go-btfs-core/options"
 )
@@ -38,7 +39,7 @@ type BadPinNode interface {
 type PinAPI interface {
 	// Add creates new pin, be default recursive - pinning the whole referenced
 	// tree
-	Add(context.Context, path.Path, ...options.PinAddOption) error
+	Add(context.Context, path.Path, time.Duration, ...options.PinAddOption) error
 
 	// Ls returns list of pinned objects on this node
 	Ls(context.Context, ...options.PinLsOption) ([]Pin, error)
