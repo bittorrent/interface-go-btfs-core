@@ -40,7 +40,7 @@ func (tp *TestSuite) TestPinAdd(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	err = api.Pin().Add(ctx, p, 0)
+	err = api.Pin().Add(ctx, p)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -59,7 +59,7 @@ func (tp *TestSuite) TestPinSimple(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	err = api.Pin().Add(ctx, p, 0)
+	err = api.Pin().Add(ctx, p)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -128,12 +128,12 @@ func (tp *TestSuite) TestPinRecursive(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	err = api.Pin().Add(ctx, path.IpldPath(nd2.Cid()), 0)
+	err = api.Pin().Add(ctx, path.IpldPath(nd2.Cid()))
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	err = api.Pin().Add(ctx, path.IpldPath(nd3.Cid()), 0, opt.Pin.Recursive(false))
+	err = api.Pin().Add(ctx, path.IpldPath(nd3.Cid()), opt.Pin.Recursive(false))
 	if err != nil {
 		t.Fatal(err)
 	}
