@@ -1,7 +1,8 @@
 package options
 
 type PinAddSettings struct {
-	Recursive bool
+	Recursive     bool
+	DurationCount int64
 }
 
 type PinLsSettings struct {
@@ -28,7 +29,8 @@ type PinUpdateOption func(*PinUpdateSettings) error
 
 func PinAddOptions(opts ...PinAddOption) (*PinAddSettings, error) {
 	options := &PinAddSettings{
-		Recursive: true,
+		Recursive:     true,
+		DurationCount: 0,
 	}
 
 	for _, opt := range opts {
@@ -133,6 +135,14 @@ func (pinOpts) Recursive(recursive bool) PinAddOption {
 func (pinOpts) RmRecursive(recursive bool) PinRmOption {
 	return func(settings *PinRmSettings) error {
 		settings.Recursive = recursive
+		return nil
+	}
+}
+
+// DurationCount is an option for Pin.Add which specifies count od the time.Duration above.
+func (pinOpts) DurationCount(count int64) PinAddOption {
+	return func(settings *PinAddSettings) error {
+		settings.DurationCount = count
 		return nil
 	}
 }

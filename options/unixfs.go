@@ -42,6 +42,8 @@ type UnixfsAddSettings struct {
 	Encrypt bool
 	Pubkey  string
 	PeerId  string
+
+	PinDuration int64
 }
 
 type UnixfsGetSettings struct {
@@ -101,6 +103,8 @@ func UnixfsAddOptions(opts ...UnixfsAddOption) (*UnixfsAddSettings, cid.Prefix, 
 		Encrypt: false,
 		Pubkey:  "",
 		PeerId:  "",
+
+		PinDuration: 0,
 	}
 
 	for _, opt := range opts {
@@ -455,6 +459,13 @@ func (unixfsOpts) EventsToAdd(sink chan<- interface{}) UnixfsAddMetaOption {
 func (unixfsOpts) PinToRemove(pin bool) UnixfsRemoveMetaOption {
 	return func(settings *UnixfsRemoveMetaSettings) error {
 		settings.Pin = pin
+		return nil
+	}
+}
+
+func (unixfsOpts) PinDuration(dur int64) UnixfsAddOption {
+	return func(settings *UnixfsAddSettings) error {
+		settings.PinDuration = dur
 		return nil
 	}
 }

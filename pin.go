@@ -2,9 +2,8 @@ package iface
 
 import (
 	"context"
-	path "github.com/TRON-US/interface-go-btfs-core/path"
-
 	"github.com/TRON-US/interface-go-btfs-core/options"
+	path "github.com/TRON-US/interface-go-btfs-core/path"
 )
 
 // Pin holds information about pinned resource
