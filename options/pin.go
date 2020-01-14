@@ -12,6 +12,7 @@ type PinLsSettings struct {
 // PinRmSettings represents the settings of pin rm command
 type PinRmSettings struct {
 	Recursive bool
+	Force     bool
 }
 
 type PinUpdateSettings struct {
@@ -47,6 +48,7 @@ func PinAddOptions(opts ...PinAddOption) (*PinAddSettings, error) {
 func PinRmOptions(opts ...PinRmOption) (*PinRmSettings, error) {
 	options := &PinRmSettings{
 		Recursive: true,
+		Force:     false,
 	}
 
 	for _, opt := range opts {
@@ -129,6 +131,14 @@ func (pinOpts) Recursive(recursive bool) PinAddOption {
 	}
 }
 
+// DurationCount is an option for Pin.Add which specifies count od the time.Duration above.
+func (pinOpts) DurationCount(count int64) PinAddOption {
+	return func(settings *PinAddSettings) error {
+		settings.DurationCount = count
+		return nil
+	}
+}
+
 // RmRecursive is an option for Pin.Rm which specifies whether to recursively
 // unpin the object linked to by the specified object(s). This does not remove
 // indirect pins referenced by other recursive pins.
@@ -139,10 +149,11 @@ func (pinOpts) RmRecursive(recursive bool) PinRmOption {
 	}
 }
 
-// DurationCount is an option for Pin.Add which specifies count od the time.Duration above.
-func (pinOpts) DurationCount(count int64) PinAddOption {
-	return func(settings *PinAddSettings) error {
-		settings.DurationCount = count
+// RmForce is an option for Pin.Rm which specifies whether to forcibly
+// unpin an object, even if constraint is made on the object (such as host-stored file).
+func (pinOpts) RmForce(force bool) PinRmOption {
+	return func(settings *PinRmSettings) error {
+		settings.Force = force
 		return nil
 	}
 }
