@@ -9,6 +9,8 @@ import (
 	"github.com/TRON-US/interface-go-btfs-core/options"
 
 	ipld "github.com/ipfs/go-ipld-format"
+
+	ipfspath "github.com/ipfs/go-path"
 )
 
 // CoreAPI defines an unified interface to IPFS for Go programs
@@ -49,6 +51,10 @@ type CoreAPI interface {
 	// ResolveNode resolves the path (if not resolved already) using Unixfs
 	// resolver, gets and returns the resolved Node
 	ResolveNode(context.Context, path.Path) (ipld.Node, error)
+
+	// ResolveIpnsPath resolves the Ipns path,
+	// gets and returns the resolved path
+	ResolveIpnsPath(context.Context, path.Path) (*ipfspath.Path, error)
 
 	// WithOptions creates new instance of CoreAPI based on this instance with
 	// a set of options applied
