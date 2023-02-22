@@ -15,7 +15,7 @@ import (
 // * /ipfs - Immutable unixfs path (files)
 // * /ipld - Immutable ipld path (data)
 // * /ipns - Mutable names. Usually resolves to one of the immutable paths
-//TODO: /local (MFS)
+// TODO: /local (MFS)
 type Path interface {
 	// String returns the path as a string.
 	String() string
@@ -119,7 +119,7 @@ func Join(base Path, a ...string) Path {
 	return &path{path: s}
 }
 
-// IpfsPath creates new /ipfs path from the provided CID
+// IpfsPath creates new /btfs path from the provided CID
 func IpfsPath(c cid.Cid) Resolved {
 	return &resolvedPath{
 		path:      path{"/btfs/" + c.String()},

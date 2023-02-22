@@ -2,7 +2,9 @@ package options
 
 import (
 	"fmt"
+
 	cid "github.com/ipfs/go-cid"
+	mc "github.com/multiformats/go-multicodec"
 	mh "github.com/multiformats/go-multihash"
 )
 
@@ -50,10 +52,10 @@ func BlockPutOptions(opts ...BlockPutOption) (*BlockPutSettings, cid.Prefix, err
 		pref.Version = 0
 	}
 
-	formatval, ok := cid.Codecs[options.Codec]
-	if !ok {
-		return nil, cid.Prefix{}, fmt.Errorf("unrecognized format: %s", options.Codec)
-	}
+	// formatval, ok := cid.Codecs[options.Codec]
+	// if !ok {
+	// 	return nil, cid.Prefix{}, fmt.Errorf("unrecognized format: %s", options.Codec)
+	// }
 
 	if options.Codec == "v0" {
 		if options.MhType != mh.SHA2_256 || (options.MhLength != -1 && options.MhLength != 32) {
@@ -61,7 +63,7 @@ func BlockPutOptions(opts ...BlockPutOption) (*BlockPutSettings, cid.Prefix, err
 		}
 	}
 
-	pref.Codec = formatval
+	pref.Codec = uint64(mc.Raw)
 
 	pref.MhType = options.MhType
 	pref.MhLength = options.MhLength
