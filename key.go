@@ -2,11 +2,12 @@ package iface
 
 import (
 	"context"
+
 	path "github.com/TRON-US/interface-go-btfs-core/path"
 
 	"github.com/TRON-US/interface-go-btfs-core/options"
 
-	"github.com/libp2p/go-libp2p-core/peer"
+	"github.com/libp2p/go-libp2p/core/peer"
 )
 
 // Key specifies the interface to Keys in KeyAPI Keystore

@@ -6,7 +6,7 @@ import (
 
 	options "github.com/TRON-US/interface-go-btfs-core/options"
 
-	"github.com/libp2p/go-libp2p-core/peer"
+	"github.com/libp2p/go-libp2p/core/peer"
 )
 
 // PubSubSubscription is an active PubSub subscription
