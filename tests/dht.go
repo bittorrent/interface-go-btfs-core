@@ -153,6 +153,8 @@ func (tp *TestSuite) TestDhtProvide(t *testing.T) {
 		t.Fatal(err)
 	}
 
+	time.Sleep(3 * time.Second)
+
 	out, err = apis[2].Dht().FindProviders(ctx, p, options.Dht.NumProviders(1))
 	if err != nil {
 		t.Fatal(err)

@@ -5,7 +5,6 @@ import (
 	"context"
 	"encoding/hex"
 	"fmt"
-	"github.com/TRON-US/interface-go-btfs-core/path"
 	"io"
 	"io/ioutil"
 	"math"
@@ -16,10 +15,12 @@ import (
 	"sync"
 	"testing"
 
+	"github.com/TRON-US/interface-go-btfs-core/path"
+
 	coreiface "github.com/TRON-US/interface-go-btfs-core"
 	"github.com/TRON-US/interface-go-btfs-core/options"
 
-	"github.com/TRON-US/go-btfs-files"
+	files "github.com/TRON-US/go-btfs-files"
 	"github.com/TRON-US/go-unixfs"
 	"github.com/TRON-US/go-unixfs/importer/helpers"
 	"github.com/ipfs/go-cid"
@@ -576,7 +577,7 @@ func (tp *TestSuite) TestAddHashOnly(t *testing.T) {
 	if err == nil {
 		t.Fatal("expected an error")
 	}
-	if !strings.Contains(err.Error(), "blockservice: key not found") {
+	if !strings.Contains(err.Error(), "block was not found locally") {
 		t.Errorf("unxepected error: %s", err.Error())
 	}
 }
