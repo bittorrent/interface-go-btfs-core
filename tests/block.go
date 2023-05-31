@@ -8,9 +8,9 @@ import (
 	"strings"
 	"testing"
 
-	coreiface "github.com/TRON-US/interface-go-btfs-core"
-	opt "github.com/TRON-US/interface-go-btfs-core/options"
-	"github.com/TRON-US/interface-go-btfs-core/path"
+	coreiface "github.com/bittorrent/interface-go-btfs-core"
+	opt "github.com/bittorrent/interface-go-btfs-core/options"
+	"github.com/bittorrent/interface-go-btfs-core/path"
 
 	mh "github.com/multiformats/go-multihash"
 )

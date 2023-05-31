@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	coreiface "github.com/TRON-US/interface-go-btfs-core"
+	coreiface "github.com/bittorrent/interface-go-btfs-core"
 )
 
 var apiNotImplemented = errors.New("api not implemented")

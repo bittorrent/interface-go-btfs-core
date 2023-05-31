@@ -3,9 +3,9 @@ package iface
 import (
 	"context"
 	"errors"
-	path "github.com/TRON-US/interface-go-btfs-core/path"
+	path "github.com/bittorrent/interface-go-btfs-core/path"
 
-	"github.com/TRON-US/interface-go-btfs-core/options"
+	"github.com/bittorrent/interface-go-btfs-core/options"
 )
 
 var ErrResolveFailed = errors.New("could not resolve name")

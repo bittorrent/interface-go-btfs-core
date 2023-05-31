@@ -4,7 +4,7 @@ import (
 	"context"
 	"io"
 
-	options "github.com/TRON-US/interface-go-btfs-core/options"
+	options "github.com/bittorrent/interface-go-btfs-core/options"
 
 	"github.com/libp2p/go-libp2p/core/peer"
 )

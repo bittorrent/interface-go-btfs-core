@@ -2,10 +2,10 @@ package iface
 
 import (
 	"context"
-	path "github.com/TRON-US/interface-go-btfs-core/path"
+	path "github.com/bittorrent/interface-go-btfs-core/path"
 	"io"
 
-	"github.com/TRON-US/interface-go-btfs-core/options"
+	"github.com/bittorrent/interface-go-btfs-core/options"
 )
 
 // BlockStat contains information about a block

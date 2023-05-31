@@ -6,9 +6,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/TRON-US/interface-go-btfs-core/path"
+	"github.com/bittorrent/interface-go-btfs-core/path"
 
-	"github.com/TRON-US/interface-go-btfs-core/options"
+	"github.com/bittorrent/interface-go-btfs-core/options"
 
 	ipldcbor "github.com/ipfs/go-ipld-cbor"
 )

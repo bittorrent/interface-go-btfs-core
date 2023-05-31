@@ -5,8 +5,8 @@ import (
 	"strings"
 	"testing"
 
-	coreiface "github.com/TRON-US/interface-go-btfs-core"
-	opt "github.com/TRON-US/interface-go-btfs-core/options"
+	coreiface "github.com/bittorrent/interface-go-btfs-core"
+	opt "github.com/bittorrent/interface-go-btfs-core/options"
 
 	cid "github.com/ipfs/go-cid"
 	mbase "github.com/multiformats/go-multibase"

@@ -5,6 +5,7 @@ import (
 	"context"
 	"encoding/hex"
 	"fmt"
+	"github.com/bittorrent/go-unixfs"
 	"io"
 	"io/ioutil"
 	"math"
@@ -15,14 +16,13 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/TRON-US/interface-go-btfs-core/path"
+	"github.com/bittorrent/interface-go-btfs-core/path"
 
-	coreiface "github.com/TRON-US/interface-go-btfs-core"
-	"github.com/TRON-US/interface-go-btfs-core/options"
+	coreiface "github.com/bittorrent/interface-go-btfs-core"
+	"github.com/bittorrent/interface-go-btfs-core/options"
 
-	files "github.com/TRON-US/go-btfs-files"
-	"github.com/TRON-US/go-unixfs"
-	"github.com/TRON-US/go-unixfs/importer/helpers"
+	files "github.com/bittorrent/go-btfs-files"
+	"github.com/bittorrent/go-unixfs/importer/helpers"
 	"github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
 	mdag "github.com/ipfs/go-merkledag"

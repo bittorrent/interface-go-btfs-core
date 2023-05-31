@@ -8,12 +8,12 @@ import (
 	"testing"
 	"time"
 
-	files "github.com/TRON-US/go-btfs-files"
+	files "github.com/bittorrent/go-btfs-files"
 
-	"github.com/TRON-US/interface-go-btfs-core/path"
+	"github.com/bittorrent/interface-go-btfs-core/path"
 
-	coreiface "github.com/TRON-US/interface-go-btfs-core"
-	opt "github.com/TRON-US/interface-go-btfs-core/options"
+	coreiface "github.com/bittorrent/interface-go-btfs-core"
+	opt "github.com/bittorrent/interface-go-btfs-core/options"
 )
 
 func (tp *TestSuite) TestName(t *testing.T) {
