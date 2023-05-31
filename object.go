@@ -2,10 +2,10 @@ package iface
 
 import (
 	"context"
-	path "github.com/TRON-US/interface-go-btfs-core/path"
+	path "github.com/bittorrent/interface-go-btfs-core/path"
 	"io"
 
-	"github.com/TRON-US/interface-go-btfs-core/options"
+	"github.com/bittorrent/interface-go-btfs-core/options"
 
 	"github.com/ipfs/go-cid"
 	ipld "github.com/ipfs/go-ipld-format"

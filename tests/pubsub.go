@@ -2,11 +2,11 @@ package tests
 
 import (
 	"context"
+	"github.com/bittorrent/interface-go-btfs-core"
 	"testing"
 	"time"
 
-	"github.com/TRON-US/interface-go-btfs-core"
-	"github.com/TRON-US/interface-go-btfs-core/options"
+	"github.com/bittorrent/interface-go-btfs-core/options"
 )
 
 func (tp *TestSuite) TestPubSub(t *testing.T) {

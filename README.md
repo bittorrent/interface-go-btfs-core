@@ -16,4 +16,4 @@ Small note: If editing the Readme, please conform to the [standard-readme](https
 
 ## License
 
-MIT © TRON-US
+MIT © Bittorrent

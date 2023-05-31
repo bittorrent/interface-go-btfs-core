@@ -3,7 +3,7 @@ package options
 import (
 	"time"
 
-	ropts "github.com/TRON-US/interface-go-btfs-core/options/namesys"
+	ropts "github.com/bittorrent/interface-go-btfs-core/options/namesys"
 )
 
 const (

@@ -6,8 +6,8 @@ import (
 	"testing"
 	"time"
 
-	iface "github.com/TRON-US/interface-go-btfs-core"
-	"github.com/TRON-US/interface-go-btfs-core/options"
+	iface "github.com/bittorrent/interface-go-btfs-core"
+	"github.com/bittorrent/interface-go-btfs-core/options"
 )
 
 func (tp *TestSuite) TestDht(t *testing.T) {

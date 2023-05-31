@@ -4,12 +4,12 @@ import (
 	"bytes"
 	"context"
 	"encoding/hex"
+	iface "github.com/bittorrent/interface-go-btfs-core"
 	"io/ioutil"
 	"strings"
 	"testing"
 
-	"github.com/TRON-US/interface-go-btfs-core"
-	opt "github.com/TRON-US/interface-go-btfs-core/options"
+	opt "github.com/bittorrent/interface-go-btfs-core/options"
 )
 
 func (tp *TestSuite) TestObject(t *testing.T) {
