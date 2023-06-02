@@ -10,7 +10,7 @@ import (
 
 	ipld "github.com/ipfs/go-ipld-format"
 
-	ipfspath "github.com/bittorrent/go-path"
+	ipfspath "github.com/ipfs/go-path"
 )
 
 // CoreAPI defines an unified interface to IPFS for Go programs
