@@ -3,8 +3,8 @@ package path
 import (
 	"strings"
 
+	ipfspath "github.com/ipfs/boxo/path"
 	cid "github.com/ipfs/go-cid"
-	ipfspath "github.com/ipfs/go-path"
 )
 
 // Path is a generic wrapper for paths used in the API. A path can be resolved
@@ -141,7 +141,7 @@ func IpldPath(c cid.Cid) Resolved {
 
 // New parses string path to a Path
 func New(p string) Path {
-	if pp, err := ipfspath.ParsePath(p); err == nil {
+	if pp, err := ipfspath.NewPath(p); err == nil {
 		p = pp.String()
 	}
 
@@ -165,7 +165,7 @@ func (p *path) String() string {
 }
 
 func (p *path) Namespace() string {
-	ip, err := ipfspath.ParsePath(p.path)
+	ip, err := ipfspath.NewPath(p.path)
 	if err != nil {
 		return ""
 	}
@@ -182,7 +182,7 @@ func (p *path) Mutable() bool {
 }
 
 func (p *path) IsValid() error {
-	_, err := ipfspath.ParsePath(p.path)
+	_, err := ipfspath.NewPath(p.path)
 	return err
 }
 
