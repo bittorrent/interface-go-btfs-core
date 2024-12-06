@@ -3,6 +3,8 @@ package options
 import (
 	"errors"
 	"fmt"
+	"os"
+	"time"
 
 	cid "github.com/ipfs/go-cid"
 	dag "github.com/ipfs/go-merkledag"
@@ -44,6 +46,11 @@ type UnixfsAddSettings struct {
 	PeerId  string
 
 	PinDuration int64
+
+	PreserveMode bool
+	PreserveMtime bool
+	Mode  os.FileMode
+	Mtime time.Time
 }
 
 type UnixfsGetSettings struct {
@@ -466,6 +473,37 @@ func (unixfsOpts) PinToRemove(pin bool) UnixfsRemoveMetaOption {
 func (unixfsOpts) PinDuration(dur int64) UnixfsAddOption {
 	return func(settings *UnixfsAddSettings) error {
 		settings.PinDuration = dur
+		return nil
+	}
+}
+
+// PreserveMode tells the adder to store the file permissions
+func (unixfsOpts) PreserveMode(enable bool) UnixfsAddOption {
+	return func(settings *UnixfsAddSettings) error {
+		settings.PreserveMode = enable
+		return nil
+	}
+}
+
+// PreserveMtime tells the adder to store the file modification time
+func (unixfsOpts) PreserveMtime(enable bool) UnixfsAddOption {
+	return func(settings *UnixfsAddSettings) error {
+		settings.PreserveMtime = enable
+		return nil
+	}
+}
+
+func (unixfsOpts) Mode(mode os.FileMode) UnixfsAddOption {
+	return func(settings *UnixfsAddSettings) error {
+		settings.Mode = mode
+		return nil
+	}
+}
+
+// Mtime represents a unix file mtime
+func (unixfsOpts) Mtime(seconds int64) UnixfsAddOption {
+	return func(settings *UnixfsAddSettings) error {
+		settings.Mtime = time.Unix(seconds, 0)
 		return nil
 	}
 }

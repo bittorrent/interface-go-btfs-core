@@ -2,6 +2,9 @@ package iface
 
 import (
 	"context"
+	"os"
+	"time"
+
 	files "github.com/bittorrent/go-btfs-files"
 	"github.com/bittorrent/interface-go-btfs-core/options"
 	path "github.com/bittorrent/interface-go-btfs-core/path"
@@ -14,6 +17,8 @@ type AddEvent struct {
 	Path  path.Resolved `json:",omitempty"`
 	Bytes int64         `json:",omitempty"`
 	Size  string        `json:",omitempty"`
+	Mode  os.FileMode   `json:",omitempty"`
+	Mtime int64         `json:",omitempty"`
 }
 
 // FileType is an enum of possible UnixFS file types.
@@ -55,6 +60,9 @@ type DirEntry struct {
 	Size   uint64   // The size of the file in bytes (or the size of the symlink).
 	Type   FileType // The type of the file.
 	Target string   // The symlink target (if a symlink).
+
+	Mode    os.FileMode
+	ModTime time.Time
 
 	Err error
 }
