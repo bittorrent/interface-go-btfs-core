@@ -11,7 +11,8 @@ type PinAddSettings struct {
 
 // PinLsSettings represent the settings for PinAPI.Ls
 type PinLsSettings struct {
-	Type string
+	Type     string
+	Detailed bool
 }
 
 // PinIsPinnedSettings represent the settings for PinAPI.IsPinned
@@ -169,11 +170,11 @@ func (pinLsOpts) Indirect() PinLsOption {
 // type.
 //
 // Supported values:
-// * "direct" - directly pinned objects
-// * "recursive" - roots of recursive pins
-// * "indirect" - indirectly pinned objects (referenced by recursively pinned
-//    objects)
-// * "all" - all pinned objects (default)
+//   - "direct" - directly pinned objects
+//   - "recursive" - roots of recursive pins
+//   - "indirect" - indirectly pinned objects (referenced by recursively pinned
+//     objects)
+//   - "all" - all pinned objects (default)
 func (pinLsOpts) Type(typeStr string) (PinLsOption, error) {
 	switch typeStr {
 	case "all", "direct", "indirect", "recursive":
@@ -187,11 +188,11 @@ func (pinLsOpts) Type(typeStr string) (PinLsOption, error) {
 // be returned
 //
 // Supported values:
-// * "direct" - directly pinned objects
-// * "recursive" - roots of recursive pins
-// * "indirect" - indirectly pinned objects (referenced by recursively pinned
-//    objects)
-// * "all" - all pinned objects (default)
+//   - "direct" - directly pinned objects
+//   - "recursive" - roots of recursive pins
+//   - "indirect" - indirectly pinned objects (referenced by recursively pinned
+//     objects)
+//   - "all" - all pinned objects (default)
 func (pinLsOpts) pinType(t string) PinLsOption {
 	return func(settings *PinLsSettings) error {
 		settings.Type = t
@@ -229,11 +230,11 @@ func (pinIsPinnedOpts) Indirect() PinIsPinnedOption {
 // type.
 //
 // Supported values:
-// * "direct" - directly pinned objects
-// * "recursive" - roots of recursive pins
-// * "indirect" - indirectly pinned objects (referenced by recursively pinned
-//    objects)
-// * "all" - all pinned objects (default)
+//   - "direct" - directly pinned objects
+//   - "recursive" - roots of recursive pins
+//   - "indirect" - indirectly pinned objects (referenced by recursively pinned
+//     objects)
+//   - "all" - all pinned objects (default)
 func (pinIsPinnedOpts) Type(typeStr string) (PinIsPinnedOption, error) {
 	switch typeStr {
 	case "all", "direct", "indirect", "recursive":
@@ -247,11 +248,11 @@ func (pinIsPinnedOpts) Type(typeStr string) (PinIsPinnedOption, error) {
 // pin is expected to be, speeding up the research.
 //
 // Supported values:
-// * "direct" - directly pinned objects
-// * "recursive" - roots of recursive pins
-// * "indirect" - indirectly pinned objects (referenced by recursively pinned
-//    objects)
-// * "all" - all pinned objects (default)
+//   - "direct" - directly pinned objects
+//   - "recursive" - roots of recursive pins
+//   - "indirect" - indirectly pinned objects (referenced by recursively pinned
+//     objects)
+//   - "all" - all pinned objects (default)
 func (pinIsPinnedOpts) pinType(t string) PinIsPinnedOption {
 	return func(settings *PinIsPinnedSettings) error {
 		settings.WithType = t
@@ -307,11 +308,11 @@ func (pinOpts) RmForce(force bool) PinRmOption {
 // be returned
 //
 // Supported values:
-// * "direct" - directly pinned objects
-// * "recursive" - roots of recursive pins
-// * "indirect" - indirectly pinned objects (referenced by recursively pinned
-//    objects)
-// * "all" - all pinned objects (default)
+//   - "direct" - directly pinned objects
+//   - "recursive" - roots of recursive pins
+//   - "indirect" - indirectly pinned objects (referenced by recursively pinned
+//     objects)
+//   - "all" - all pinned objects (default)
 func (pinOpts) pinType(t string) PinLsOption {
 	return func(settings *PinLsSettings) error {
 		settings.Type = t
@@ -327,4 +328,3 @@ func (pinOpts) Unpin(unpin bool) PinUpdateOption {
 		return nil
 	}
 }
-

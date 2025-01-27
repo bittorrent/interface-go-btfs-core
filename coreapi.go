@@ -4,13 +4,14 @@ package iface
 
 import (
 	"context"
+
 	path "github.com/bittorrent/interface-go-btfs-core/path"
 
 	"github.com/bittorrent/interface-go-btfs-core/options"
 
 	ipld "github.com/ipfs/go-ipld-format"
 
-	ipfspath "github.com/ipfs/go-path"
+	ipfspath "github.com/ipfs/boxo/path"
 )
 
 // CoreAPI defines an unified interface to IPFS for Go programs

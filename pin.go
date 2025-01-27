@@ -2,6 +2,7 @@ package iface
 
 import (
 	"context"
+
 	"github.com/bittorrent/interface-go-btfs-core/options"
 	path "github.com/bittorrent/interface-go-btfs-core/path"
 )
